@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home !{% endblock %}
+
+{% block body %}
+
+    <form id="perfectMazeForm" action="{{ path('perfectMaze') }}" method="get">
+        <label for="width">width</label>
+        <input name="width" type="text">
+        <label for="height">height</label>
+        <input name="height" type="text">
+        <input type="submit">
+    </form>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+td{
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+table{
+    border: 1px solid black;
+    margin: auto;
+}
+td.border-top-none{
+    border-top: none !important;
+}
+td.border-right-none{
+    border-right: none !important;;
+}
+td.border-bottom-none{
+    border-bottom: none !important;;
+}
+td.border-left-none{
+    border-left: none !important;;
+}
