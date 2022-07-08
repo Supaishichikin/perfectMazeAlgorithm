@@ -10,9 +10,9 @@ function generateTable(table, height, width){
             //on va vérifier si la cellule que l'on a créée peut être une case d'entrée ou de sortie du labyrinthe
             let possibleEntryEndCell = document.querySelector('td[data-cell="'+ cellsCount+'"]');
 
-            //si c'est une case en bordure gauche, elle est éligible pour être une case d'entrée. On lui ajoute donc une class
+            //Si c'est une case en bordure gauche, elle est éligible pour être une case d'entrée. On lui ajoute donc une class
             if (possibleEntryEndCell.getAttribute('data-position-x') == 0){
-                possibleEntryEndCell.classList.add('possibleEntryCell');//on ajoute une classe pour marquer la cellule
+                possibleEntryEndCell.classList.add('possibleEntryCell');//On ajoute une classe pour marquer la cellule
                 //si c'est une case en bordure droite, elle est éligible pour être une case de sortie. On lui ajoute donc une class
             }else if(possibleEntryEndCell.getAttribute('data-position-x') == width-1) {
                 possibleEntryEndCell.classList.add('possibleEndCell');//on ajoute une classe pour marquer la cellule
@@ -22,16 +22,16 @@ function generateTable(table, height, width){
         }
     }
 }
-//affecter tout un groupe de cellule le path-id de la cellule choisit
+//affecter à tout un groupe de cellule le path-id de la cellule choisit
 function affectationGroupPathId(neighboringCell, targetCell ){
-    //on affecte un l'id de chemin de la cellule cible à tout le groupe de cellule dont l'id de chemin est le même que la cellule voisine
+    //on affecte l'id de chemin de la cellule cible à tout le groupe de cellule dont l'id de chemin est le même que la cellule voisine
     let neighboringCellsGroup = document.querySelectorAll('td[data-path-id="' + neighboringCell.getAttribute('data-path-id')+'"]');
-    //on parcourt le tableau en attribuant un path-id à chaque cellule
+    //on parcourt l'array en attribuant un path-id à chaque cellule
     for(let i = 0; i < neighboringCellsGroup.length; i++){
         neighboringCellsGroup[i].setAttribute('data-path-id', targetCell.getAttribute('data-path-id'));
     }
-    //dans le cas contraire on affecte seulement
-    neighboringCell.setAttribute('data-path-id', targetCell.getAttribute('data-path-id'));// si la case voisine n'avait pas d'id de chemin, on lui affecte.
+    //si le path-id de la cellule est vide on lui affecte celui de la cellule cible
+    neighboringCell.setAttribute('data-path-id', targetCell.getAttribute('data-path-id'));
 }
 
 function generateTableMaze(height,width){
@@ -49,7 +49,7 @@ function generateTableMaze(height,width){
     possibleEndCells[Math.floor(Math.random()*possibleEndCells.length)].classList.add('border-right-none');
     possibleEntryCells[Math.floor(Math.random()*possibleEntryCells.length)].classList.add('border-left-none');
 
-    //on stock les 4 directions possibles dans un array
+    //on stocke les 4 directions possibles dans un array
     const orientations = ["N","O","S","E"];
     while(openWallCount < (height*width) -1 ){
 
@@ -94,8 +94,9 @@ function generateTableMaze(height,width){
                         if(neighboringCell.getAttribute('data-path-id') != targetCell.getAttribute('data-path-id')){
                             //on affecte l'id de chemin de la cellule cible à tout le groupe de la cellule voisine
                             affectationGroupPathId(neighboringCell,targetCell);
-                            neighboringCell.classList.add('border-right-none');//on fait visuellement disparaitre la porte
-                            targetCell.classList.add('border-left-none');//on fait visuellement disparaitre la porte
+                            //on fait visuellement disparaitre les portes
+                            neighboringCell.classList.add('border-right-none');
+                            targetCell.classList.add('border-left-none');
                             openWallCount++;
                         }
                     }
@@ -111,8 +112,9 @@ function generateTableMaze(height,width){
                         if(neighboringCell.getAttribute('data-path-id') != targetCell.getAttribute('data-path-id')){
                             //on affecte l'id de chemin de la cellule cible à tout le groupe de la cellule voisine
                             affectationGroupPathId(neighboringCell,targetCell);
-                            neighboringCell.classList.add('border-top-none');//on fait visuellement disparaitre la porte
-                            targetCell.classList.add('border-bottom-none');//on fait visuellement disparaitre la porte
+                            //on fait visuellement disparaitre les portes
+                            neighboringCell.classList.add('border-top-none');
+                            targetCell.classList.add('border-bottom-none');
                             openWallCount++;
                         }
                     }
@@ -129,8 +131,9 @@ function generateTableMaze(height,width){
                         if(neighboringCell.getAttribute('data-path-id') != targetCell.getAttribute('data-path-id')){
                             //on affecte l'id de chemin de la cellule cible à tout le groupe de la cellule voisine
                             affectationGroupPathId(neighboringCell,targetCell);
-                            neighboringCell.classList.add('border-left-none');//on fait visuellement disparaitre la porte
-                            targetCell.classList.add('border-right-none');//on fait visuellement disparaitre la porte
+                            //on fait visuellement disparaitre les portes
+                            neighboringCell.classList.add('border-left-none');
+                            targetCell.classList.add('border-right-none');
                             openWallCount++;//on incrémente le compteur
                         }
                     }
