@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PerfectMazeController extends AbstractController
 {
     /**
-     * @Route("/home", name="homepage")
+     * @Route("/", name="homepage")
      */
     public function homepage(Request $request): Response
     {
